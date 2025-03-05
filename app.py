@@ -2,8 +2,6 @@ import logging
 import os
 import requests
 from flask import Flask, request, jsonify
-from flask_ngrok import run_with_ngrok
-from pyngrok import ngrok
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -13,24 +11,14 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 # Flask App Setup
-app = Flask(__name__)
-run_with_ngrok(app)
+app = Flask(_name_)
 
 # Load API Keys Securely
-NGROK_AUTH_TOKEN = os.getenv("NGROK_AUTH_TOKEN")
 IBM_CLOUD_API_KEY = os.getenv("IBM_CLOUD_API_KEY")
 DEPLOYMENT_ID = os.getenv("DEPLOYMENT_ID")
 
 # IBM Watson API URL
 DEPLOYMENT_ENDPOINT = f"https://jp-tok.ml.cloud.ibm.com/ml/v4/deployments/realtime_churn_model/predictions?version=2021-05-01"
-
-# Set Ngrok Authentication
-ngrok.set_auth_token(NGROK_AUTH_TOKEN)
-
-# Start Ngrok
-ngrok_tunnel = ngrok.connect(5000)
-public_url = ngrok_tunnel.public_url
-print(f"Flask is running at: {public_url}")
 
 
 def get_iam_token():
@@ -71,6 +59,5 @@ def predict():
         return jsonify({"error": str(e)}), 500
 
 
-if __name__ == '__main__':
-   run_with_ngrok(app)  # ✅ Correct way to run Flask with Ngrok
-
+if _name_ == '_main_':
+    app.run(host='0.0.0.0', port=5000)  # ✅ Run Flask normally
