@@ -2,3 +2,4 @@ flask
 requests
 ibm-watson-machine-learning
 gunicorn
+python-dotenv
