@@ -11,7 +11,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 # Flask App Setup
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Load API Keys Securely
 IBM_CLOUD_API_KEY = os.getenv("IBM_CLOUD_API_KEY")
